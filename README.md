@@ -16,7 +16,8 @@ Ex.
 Ele deve ler de um arquivo de configuração com:
     - O e-mail de destino dos alertas
     - As configurações de acesso ao servidor de SMTP que irá enviar o e-mail
-    - A escolha da API de cotação é livre.
+
+A escolha da API de cotação é livre.
 
 O programa deve ficar continuamente monitorando a cotação do ativo enquanto estiver rodando.
 Em outras palavras, dada a cotação de PETR4 abaixo.
@@ -25,3 +26,11 @@ Em outras palavras, dada a cotação de PETR4 abaixo.
 
 - Toda vez que o preço for maior que linha-azul, um e-mail deve ser disparado aconselhando a venda.
 - Toda vez que o preço for menor que linha-vermelha, um e-mail deve ser disparado aconselhando a compra.
+
+
+
+----
+
+Usei Install-Package Newtonsoft.Json
+
+Explicar pq eu estou usando a api Twelve data

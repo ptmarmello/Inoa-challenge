@@ -8,4 +8,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="3.3.0" />
+    <PackageReference Include="newtonsoft.json" Version="1.0.2.201" />
+  </ItemGroup>
+
 </Project>

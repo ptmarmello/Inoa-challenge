@@ -37,6 +37,16 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "MailKit": {
+              "target": "Package",
+              "version": "[3.3.0, )"
+            },
+            "newtonsoft.json": {
+              "target": "Package",
+              "version": "[1.0.2.201, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
