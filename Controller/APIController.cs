@@ -10,10 +10,15 @@ namespace Controller
             
             var client = new HttpClient();
             double stockValue = 0;
+            String jsonFile = File.ReadAllText("appsettings.json");
+            dynamic infoInJson = JsonConvert.DeserializeObject(jsonFile);
+
+            string apiKey = infoInJson["Smtp"]["Apikey"];
+
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri($"https://api.twelvedata.com/time_series?apikey=d83a6521ac1949c0876cc5cfcdefe449&interval=1min&symbol={stockSymbol}&format=JSON&outputsize=1"),
+                RequestUri = new Uri($"https://api.twelvedata.com/time_series?apikey={apiKey}&interval=1min&symbol={stockSymbol}&format=JSON&outputsize=1"),
                 // RequestUri = new Uri($"https://www.google.com/search?q={stockSymbol}&oq={stockSymbol}&ie=UTF-8"),
             };
             using (var response = await client.SendAsync(request))
