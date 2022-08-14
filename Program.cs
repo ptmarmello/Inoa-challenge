@@ -1,15 +1,11 @@
 ﻿using System;
-// using System.Net.Mail;
-// using MailKit.Net.Smtp;
-// using MailKit;
-// using MimeKit;
-
 using Controller;
 
 namespace ConsoleApp
 {
     class Program
     {  
+
         static async Task Main(string[] args)
         {
             // isso aqui depois tem que mudar pra receber tudo de uma só vez
@@ -29,7 +25,10 @@ namespace ConsoleApp
                 highestPrice = priceOne;
             }
 
-            await StockController.StockCall(StockValue, lowestPrice, highestPrice );
+            while(true){
+                await StockController.StockCall(StockValue, lowestPrice, highestPrice );
+                await Task.Delay(60000);
+            }
         }
     }
 }

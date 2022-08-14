@@ -27,7 +27,7 @@ namespace Controller
                 var body = await response.Content.ReadAsStringAsync();
                 dynamic bodyInJson = JsonConvert.DeserializeObject(body);
 
-                // verificar se vier com algum código diferente de 200 e retornar o erro antes de mandar o email
+                // verifica se vier com algum código diferente de 200 e retornar o erro antes de mandar o email
                 if( bodyInJson["status"].Value == "ok" ){
                     // A divisão é uma forma de converter o valor que chega em formato string e é passado para double
                     stockValue = Convert.ToDouble(bodyInJson["values"][0]["close"].Value)/100000;

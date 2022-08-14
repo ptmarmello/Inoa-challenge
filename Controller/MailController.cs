@@ -22,12 +22,22 @@ namespace Controller
 
             String emailAddress = infoInJson["Smtp"]["Email"].Value.ToString();
             String password = infoInJson["Smtp"]["Password"].Value.ToString() ;
-            String toWho = infoInJson["EmailConfiguration"]["toWho"].Value.ToString();
+            // Array toWho = infoInJson["EmailConfiguration"]["toWho"].Value;
             string smtpClient = infoInJson["Smtp"]["Host"].Value.ToString();
             Int32.TryParse( infoInJson["Smtp"]["Port"].Value , out port );
 
             message.From.Add(new MailboxAddress("Stock Warning", emailAddress));
-            message.To.Add( MailboxAddress.Parse(toWho) );
+
+            if(infoInJson["EmailConfiguration"]["toWho"].GetType().ToString() == "Newtonsoft.Json.Linq.JArray"){
+                foreach (string email in infoInJson["EmailConfiguration"]["toWho"])
+                {
+                    message.To.Add( MailboxAddress.Parse(email) );
+                }
+            }
+            else{
+                message.To.Add( MailboxAddress.Parse( infoInJson["EmailConfiguration"]["toWho"].Value ) );
+            }
+
             
             if ( MessageType == "Sell" )
             {
@@ -55,6 +65,7 @@ namespace Controller
                 
                 client.Authenticate(emailAddress, password);
                 client.Send(message);
+                Console.WriteLine("Email Sent!");
             }
             catch (System.Exception ex)
             {

@@ -1,4 +1,5 @@
 ./appsettings.json
+./localConfig.json
 
 ./obj
 ./bin
