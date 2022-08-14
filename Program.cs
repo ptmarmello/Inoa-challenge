@@ -13,9 +13,9 @@ namespace ConsoleApp
         static async Task Main(string[] args)
         {
             // isso aqui depois tem que mudar pra receber tudo de uma só vez
-            string StockValue = "petr4";
-            double priceOne = 30.2;
-            double priceTwo = 35.6;
+            string StockValue = args[0].ToString();
+            double priceOne = Convert.ToDouble( args[1].ToString() )/10;
+            double priceTwo = Convert.ToDouble( args[2].ToString() )/10;
 
             double lowestPrice;
             double highestPrice;

@@ -18,15 +18,15 @@ namespace Controller
             MimeMessage message = new MimeMessage();
             String jsonFile = File.ReadAllText("appsettings.json");
             dynamic infoInJson = JsonConvert.DeserializeObject(jsonFile);
+            int port = 0;
 
             String emailAddress = infoInJson["Smtp"]["Email"].Value.ToString();
             String password = infoInJson["Smtp"]["Password"].Value.ToString() ;
             String toWho = infoInJson["EmailConfiguration"]["toWho"].Value.ToString();
             string smtpClient = infoInJson["Smtp"]["Host"].Value.ToString();
-            int port = Convert.ToInt64( infoInJson["Smtp"]["Port"].Value );
+            Int32.TryParse( infoInJson["Smtp"]["Port"].Value , out port );
 
-
-            message.From.Add(new MailboxAddress("Stock Warning", emailAddress)); //Trocar por leitura de quem vai enviar
+            message.From.Add(new MailboxAddress("Stock Warning", emailAddress));
             message.To.Add( MailboxAddress.Parse(toWho) );
             
             if ( MessageType == "Sell" )

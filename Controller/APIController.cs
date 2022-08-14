@@ -13,7 +13,7 @@ namespace Controller
             String jsonFile = File.ReadAllText("appsettings.json");
             dynamic infoInJson = JsonConvert.DeserializeObject(jsonFile);
 
-            string apiKey = infoInJson["Smtp"]["Apikey"];
+            string apiKey = infoInJson["Smtp"]["Apikey"].Value;
 
             var request = new HttpRequestMessage
             {
