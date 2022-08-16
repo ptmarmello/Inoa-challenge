@@ -1,7 +1,4 @@
 using System;
-using System.IO;
-using System.Text;
-using System.Collections.Generic;
 using MailKit;
 using MailKit.Net.Smtp;
 using MimeKit;
@@ -20,7 +17,7 @@ class MailController
 
         String emailAddress = infoInJson["Smtp"]["Email"].Value.ToString();
         String password = infoInJson["Smtp"]["Password"].Value.ToString() ;
-        // Array toWho = infoInJson["EmailConfiguration"]["toWho"].Value;
+
         string smtpClient = infoInJson["Smtp"]["Host"].Value.ToString();
         Int32.TryParse( infoInJson["Smtp"]["Port"].Value , out port );
 
@@ -36,10 +33,23 @@ class MailController
             message.To.Add( MailboxAddress.Parse( infoInJson["EmailConfiguration"]["toWho"].Value ) );
         }
 
-        
+        // Caso queira a mensagem com HTML Body, descomente
+        // var builder = new BodyBuilder();
+
+
         if ( MessageType == "Sell" )
         {
             message.Subject = "Vende ai amigo";
+            
+        // Retire esses comentários para criar uma mensagem com HTML  
+            // builder.HtmlBody = string.Format(@"<h1>Opa!</h1>
+            //     <p>Você pode Vender!</p>
+            //     <p>---</p>
+            //     <p>Ass.: Stock Warning</p>
+            // ");
+            // message.Body = builder.ToMessageBody();
+            
+            // Caso queira só colocar como um Texto simples:
             message.Body = new TextPart("plain")
             {
                 Text= @"Yes,
@@ -49,6 +59,17 @@ class MailController
         else
         {
             message.Subject = "Compra ai amigo";
+
+
+            // Retire esses comentários para criar uma mensagem com HTML  
+            // builder.HtmlBody = string.Format(@"<h1>Opa!</h1>
+            //     <p>Você pode Vender!</p>
+            //     <p>---</p>
+            //     <p>Ass.: Stock Warning</p>
+            // ");
+            // message.Body = builder.ToMessageBody();
+            
+            // Caso queira só colocar como um Texto simples:
             message.Body = new TextPart("plain")
             {
                 Text= @"Yes,
